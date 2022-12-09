@@ -1,5 +1,10 @@
 package de.tum.in.ase;
 
 public enum Profession {
-    BANKER
+    STUDENT,
+    SCIENTIST,
+    BANKER,
+    PROGRAMMER,
+    TEACHER,
+    DRIVER,
 }

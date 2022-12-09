@@ -30,6 +30,12 @@ public class DataAnalytics {
      *
      * @return long
      */
+     public long getPeopleCountMonday() {
+         return this.data.stream()
+                 .map(Person::getWorkingDays) // Map to List<Day> Stream
+                 .filter(list -> list.contains(Day.MONDAY))//Filter on Lists
+                 .count(); //Count
+     }
 
     //Task 2: Find out all people that have the name "Smith", "Brown" or "Johnson" and are 30 or above. Return the average age
     /**
@@ -37,6 +43,14 @@ public class DataAnalytics {
      *
      * @return double
      */
+    public double getAverageAge() {
+        return this.data.stream()
+                .filter(person -> person.getAge() >= 30) //Filter on age
+                .filter(person -> person.getLastName().equals("Smith") || person.getLastName().equals("Brown") || person.getLastName().equals("Johnson")) //Filter on name
+                .mapToInt(Person::getAge) //Map to IntStream
+                .average() //Average
+                .orElse(0); //Return 0 if no value is present
+    }
 
     //Task 3: Now everyone should spend two more hours on their hobbies.
     /**
@@ -44,6 +58,10 @@ public class DataAnalytics {
      *
      * @return void
      */
+    public void shiftTimeForHobbies() {
+        this.data.stream()
+                .forEach(person -> person.setTimeForHobbies(person.getTimeForHobbies() + 2)); //Add 2 to every persons timeForHobbies
+    }
 
     //Task 4: Due to the development of autonomous vehicles, all drivers now have to learn something new.
     //Therefore all drivers should have the profession student now.
@@ -52,7 +70,11 @@ public class DataAnalytics {
      *
      * @return void
      */
-
+    public void changeProfessionToStudent() {
+        this.data.stream()
+                .filter(person -> person.getProfession().equals(Profession.DRIVER)) //Filter on profession
+                .forEach(person -> person.setProfession(Profession.STUDENT)); //Set profession to student
+    }
 
     /**
      * @return this.data

@@ -54,4 +54,6 @@ public class Person {
     public String toString() {
         return lastName + " | " + age + " | " + profession + " | " + workingDays + " | " + timeForHobbies + "\n";
     }
+
+
 }
